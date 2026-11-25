@@ -7,6 +7,7 @@ import '../../discover/screens/discover_screen.dart';
 import '../../notifications/screens/notification_screen.dart';
 import '../../profile/screens/profile_screen.dart';
 import '../../hospitals/screens/hospital_screen.dart';
+import '../../doctors/screens/doctor_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -127,6 +128,13 @@ class HomeContent extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => const HospitalScreen(),
+            ),
+          );
+        } else if (title == 'Find Doctors') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const DoctorScreen(),
             ),
           );
         } else {
