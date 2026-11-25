@@ -1,8 +1,9 @@
 
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../ai_coordinator/screens/ai_coordinator_screen.dart';
+import '../../discover/screens/discover_screen.dart';
 import '../../notifications/screens/notification_screen.dart';
 import '../../profile/screens/profile_screen.dart';
 
@@ -48,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onOpenAiCoordinator: () => jumpToPage(1),
           ),
           const AiCoordinatorScreen(),
+          const DiscoverScreen(),
           const NotificationScreen(),
           const ProfileScreen(),
         ],
