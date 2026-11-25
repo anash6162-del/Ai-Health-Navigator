@@ -8,6 +8,7 @@ import '../../notifications/screens/notification_screen.dart';
 import '../../profile/screens/profile_screen.dart';
 import '../../hospitals/screens/hospital_screen.dart';
 import '../../doctors/screens/doctor_screen.dart';
+import '../../lab_tests/screens/lab_test_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -137,7 +138,15 @@ class HomeContent extends StatelessWidget {
               builder: (context) => const DoctorScreen(),
             ),
           );
-        } else {
+        } else if (title == 'Lab Tests') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LabTestScreen(),
+            ),
+          );
+        }
+        else {
           showComingSoon(context, title);
         }
       },
