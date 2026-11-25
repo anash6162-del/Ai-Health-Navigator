@@ -9,6 +9,7 @@ import '../../profile/screens/profile_screen.dart';
 import '../../hospitals/screens/hospital_screen.dart';
 import '../../doctors/screens/doctor_screen.dart';
 import '../../lab_tests/screens/lab_test_screen.dart';
+import '../../pharmacy/screens/pharmacy_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -143,6 +144,13 @@ class HomeContent extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => const LabTestScreen(),
+            ),
+          );
+        } else if (title == 'Pharmacy') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PharmacyScreen(),
             ),
           );
         }
