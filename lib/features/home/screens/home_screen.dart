@@ -6,6 +6,7 @@ import '../../ai_coordinator/screens/ai_coordinator_screen.dart';
 import '../../discover/screens/discover_screen.dart';
 import '../../notifications/screens/notification_screen.dart';
 import '../../profile/screens/profile_screen.dart';
+import '../../hospitals/screens/hospital_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -120,7 +121,18 @@ class HomeContent extends StatelessWidget {
       String title,
       ) {
     return InkWell(
-      onTap: () => showComingSoon(context, title),
+      onTap: () {
+        if (title == 'Find Hospitals') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HospitalScreen(),
+            ),
+          );
+        } else {
+          showComingSoon(context, title);
+        }
+      },
       borderRadius: BorderRadius.circular(16),
       child: Container(
         padding: const EdgeInsets.all(16),
