@@ -10,7 +10,7 @@ import '../../hospitals/screens/hospital_screen.dart';
 import '../../doctors/screens/doctor_screen.dart';
 import '../../lab_tests/screens/lab_test_screen.dart';
 import '../../pharmacy/screens/pharmacy_screen.dart';
-
+import '../../appointments/screens/appointment_screen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -373,58 +373,165 @@ class HomeContent extends StatelessWidget {
 
               const SizedBox(height: 28),
 
+
               // Upcoming appointment
-              const Text(
-                'Upcoming Appointment',
-                style: TextStyle(
-                  fontSize: 19,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Upcoming Appointments',
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AppointmentScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text('View All'),
+                  ),
+                ],
               ),
 
               const SizedBox(height: 14),
 
+
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(18),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: AppColors.border),
                 ),
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Icon(
-                          Icons.calendar_month,
-                          color: AppColors.primary,
+                        Container(
+                          height: 45,
+                          width: 45,
+                          decoration: BoxDecoration(
+                            color: AppColors.lightBlue,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Icon(
+                            Icons.person_outline,
+                            color: AppColors.primary,
+                            size: 26,
+                          ),
                         ),
-                        SizedBox(width: 10),
-                        Text(
-                          'No upcoming appointments',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+
+                        const SizedBox(width: 12),
+
+                        const Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Dr. Sarah Johnson',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: AppColors.textPrimary,
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                'Cardiologist',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: AppColors.textSecondary,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.green.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Text(
+                            'Confirmed',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Your scheduled appointments will appear here.',
-                      style: TextStyle(
-                        color: AppColors.textSecondary,
-                        fontSize: 13,
-                      ),
+
+                    const SizedBox(height: 16),
+
+                    const Divider(),
+
+                    const SizedBox(height: 12),
+
+                    const Row(
+                      children: [
+                        Icon(
+                          Icons.calendar_month_outlined,
+                          color: AppColors.primary,
+                          size: 17,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          '28 November 2026',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Spacer(),
+                        Icon(
+                          Icons.access_time,
+                          color: AppColors.primary,
+                          size: 17,
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          '10:30 AM',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    const Row(
+                      children: [
+                        Icon(
+                          Icons.location_on_outlined,
+                          color: AppColors.textSecondary,
+                          size: 17,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'City Hospital, Kathmandu',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 28),
 
               // Care journey
               const Text(
