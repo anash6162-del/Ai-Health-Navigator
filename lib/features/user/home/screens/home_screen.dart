@@ -11,6 +11,8 @@ import '../../doctors/screens/doctor_screen.dart';
 import '../../lab_tests/screens/lab_test_screen.dart';
 import '../../pharmacy/screens/pharmacy_screen.dart';
 import '../../appointments/screens/appointment_screen.dart';
+import '../../care_journey/screens/care_journey_screen.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -58,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
           const ProfileScreen(),
         ],
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
         onTap: jumpToPage,
@@ -153,8 +154,7 @@ class HomeContent extends StatelessWidget {
               builder: (context) => const PharmacyScreen(),
             ),
           );
-        }
-        else {
+        } else {
           showComingSoon(context, title);
         }
       },
@@ -373,7 +373,6 @@ class HomeContent extends StatelessWidget {
 
               const SizedBox(height: 28),
 
-
               // Upcoming appointment
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -401,7 +400,6 @@ class HomeContent extends StatelessWidget {
               ),
 
               const SizedBox(height: 14),
-
 
               Container(
                 width: double.infinity,
@@ -532,7 +530,6 @@ class HomeContent extends StatelessWidget {
                 ),
               ),
 
-
               // Care journey
               const Text(
                 'Your Care Journey',
@@ -545,31 +542,42 @@ class HomeContent extends StatelessWidget {
 
               const SizedBox(height: 14),
 
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                  color: AppColors.lightBlue,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: const Row(
-                  children: [
-                    Icon(
-                      Icons.health_and_safety_outlined,
-                      color: AppColors.primary,
-                      size: 32,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CareJourneyScreen(),
                     ),
-                    SizedBox(width: 14),
-                    Expanded(
-                      child: Text(
-                        'Your health journey starts here. Explore healthcare services and manage your health in one place.',
-                        style: TextStyle(
-                          color: AppColors.textPrimary,
-                          fontSize: 13,
+                  );
+                },
+                borderRadius: BorderRadius.circular(16),
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: AppColors.lightBlue,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(
+                        Icons.health_and_safety_outlined,
+                        color: AppColors.primary,
+                        size: 32,
+                      ),
+                      SizedBox(width: 14),
+                      Expanded(
+                        child: Text(
+                          'Your health journey starts here. Explore healthcare services and manage your health in one place.',
+                          style: TextStyle(
+                            color: AppColors.textPrimary,
+                            fontSize: 13,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
 
