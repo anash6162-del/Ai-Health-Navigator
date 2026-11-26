@@ -1,5 +1,5 @@
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});

@@ -1,5 +1,5 @@
-import '../../home/screens/home_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:ai_health_navigator/features/user/home/screens/home_screen.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../core/theme/app_colors.dart';
 

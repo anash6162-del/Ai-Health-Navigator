@@ -1,7 +1,7 @@
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-import '../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../ai_coordinator/screens/ai_coordinator_screen.dart';
 import '../../discover/screens/discover_screen.dart';
 import '../../notifications/screens/notification_screen.dart';

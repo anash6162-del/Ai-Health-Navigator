@@ -1,90 +1,79 @@
 
-import 'package:flutter/material.dart';
-import '../../../core/theme/app_colors.dart';
+import 'package:material_ui/material_ui.dart';
+import '../../../../core/theme/app_colors.dart';
 
-class DoctorScreen extends StatefulWidget {
-  const DoctorScreen({super.key});
+class HospitalScreen extends StatefulWidget {
+  const HospitalScreen({super.key});
 
   @override
-  State<DoctorScreen> createState() => _DoctorScreenState();
+  State<HospitalScreen> createState() => _HospitalScreenState();
 }
 
-class _DoctorScreenState extends State<DoctorScreen> {
+class _HospitalScreenState extends State<HospitalScreen> {
   final TextEditingController searchController =
   TextEditingController();
 
   String searchQuery = '';
   String selectedFilter = 'All';
 
-  final List<Map<String, dynamic>> doctors = [
+  final List<Map<String, dynamic>> hospitals = [
     {
-      'name': 'Dr. Anil Sharma',
-      'specialty': 'Cardiologist',
-      'hospital': 'Grande International Hospital',
-      'experience': '12 years',
-      'rating': '4.8',
-      'availability': 'Available',
-      'qualification': 'MD, DM Cardiology',
-      'about': 'Specialist in heart and cardiovascular care.',
-    },
-    {
-      'name': 'Dr. Sita Thapa',
-      'specialty': 'Dermatologist',
-      'hospital': 'Norvic International Hospital',
-      'experience': '8 years',
-      'rating': '4.7',
-      'availability': 'Available',
-      'qualification': 'MD Dermatology',
-      'about': 'Specialist in skin and hair conditions.',
-    },
-    {
-      'name': 'Dr. Rajesh Karki',
-      'specialty': 'Neurologist',
-      'hospital': 'Patan Hospital',
-      'experience': '10 years',
-      'rating': '4.6',
-      'availability': 'Unavailable',
-      'qualification': 'MD Neurology',
-      'about': 'Specialist in brain and nervous system care.',
-    },
-    {
-      'name': 'Dr. Mira Shrestha',
-      'specialty': 'Pediatrician',
-      'hospital': 'Civil Service Hospital',
-      'experience': '9 years',
-      'rating': '4.9',
-      'availability': 'Available',
-      'qualification': 'MD Pediatrics',
-      'about': 'Specialist in child health and development.',
-    },
-    {
-      'name': 'Dr. Suman Adhikari',
-      'specialty': 'Orthopedic',
-      'hospital': 'Grande International Hospital',
-      'experience': '11 years',
+      'name': 'Grande International Hospital',
+      'address': 'Dhapasi, Kathmandu',
+      'type': 'Multi-speciality',
+      'distance': '4.2 km',
       'rating': '4.5',
-      'availability': 'Available',
-      'qualification': 'MS Orthopedics',
-      'about': 'Specialist in bone and joint care.',
+      'phone': '01-5159266',
+      'departments': ['Cardiology', 'Neurology', 'Orthopedics'],
+      'emergency': true,
+    },
+    {
+      'name': 'Norvic International Hospital',
+      'address': 'Thapathali, Kathmandu',
+      'type': 'Multi-speciality',
+      'distance': '2.8 km',
+      'rating': '4.4',
+      'phone': '01-5970032',
+      'departments': ['Cardiology', 'General Medicine', 'Surgery'],
+      'emergency': true,
+    },
+    {
+      'name': 'Civil Service Hospital',
+      'address': 'Minbhawan, Kathmandu',
+      'type': 'General Hospital',
+      'distance': '3.5 km',
+      'rating': '4.2',
+      'phone': '01-4107000',
+      'departments': ['General Medicine', 'Pediatrics', 'Surgery'],
+      'emergency': true,
+    },
+    {
+      'name': 'Patan Hospital',
+      'address': 'Lagankhel, Lalitpur',
+      'type': 'General Hospital',
+      'distance': '5.6 km',
+      'rating': '4.6',
+      'phone': '01-5422278',
+      'departments': ['Emergency', 'Pediatrics', 'Gynecology'],
+      'emergency': true,
     },
   ];
 
-  List<Map<String, dynamic>> get filteredDoctors {
-    return doctors.where((doctor) {
+  List<Map<String, dynamic>> get filteredHospitals {
+    return hospitals.where((hospital) {
       final matchesSearch =
-          doctor['name'].toString().toLowerCase().contains(
+          hospital['name'].toString().toLowerCase().contains(
             searchQuery.toLowerCase(),
           ) ||
-              doctor['specialty'].toString().toLowerCase().contains(
-                searchQuery.toLowerCase(),
-              ) ||
-              doctor['hospital'].toString().toLowerCase().contains(
+              hospital['address'].toString().toLowerCase().contains(
                 searchQuery.toLowerCase(),
               );
 
-      final matchesFilter =
-          selectedFilter == 'All' ||
-              doctor['specialty'] == selectedFilter;
+      final matchesFilter = selectedFilter == 'All' ||
+          (selectedFilter == 'Emergency' &&
+              hospital['emergency'] == true) ||
+          (selectedFilter == 'Multi-speciality' &&
+              hospital['type'] == 'Multi-speciality');
 
       return matchesSearch && matchesFilter;
     }).toList();
@@ -104,7 +93,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
-          'Find Doctors',
+          'Find Hospitals',
           style: TextStyle(
             color: AppColors.textPrimary,
             fontWeight: FontWeight.bold,
@@ -121,7 +110,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Find the right doctor for you',
+                'Find the right care for you',
                 style: TextStyle(
                   fontSize: 23,
                   fontWeight: FontWeight.bold,
@@ -132,7 +121,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
               const SizedBox(height: 7),
 
               const Text(
-                'Search doctors by name or specialty.',
+                'Search hospitals and explore available services.',
                 style: TextStyle(
                   color: AppColors.textSecondary,
                 ),
@@ -149,7 +138,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
                   });
                 },
                 decoration: InputDecoration(
-                  hintText: 'Search doctor or specialty...',
+                  hintText: 'Search hospital or location...',
                   prefixIcon: const Icon(
                     Icons.search,
                     color: AppColors.primary,
@@ -174,8 +163,9 @@ class _DoctorScreenState extends State<DoctorScreen> {
 
               const SizedBox(height: 20),
 
+              // Filter options
               const Text(
-                'Filter by Specialty',
+                'Filter Hospitals',
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -187,15 +177,8 @@ class _DoctorScreenState extends State<DoctorScreen> {
 
               Wrap(
                 spacing: 9,
-                runSpacing: 5,
-                children: [
-                  'All',
-                  'Cardiologist',
-                  'Dermatologist',
-                  'Neurologist',
-                  'Pediatrician',
-                  'Orthopedic',
-                ].map((filter) {
+                children: ['All', 'Emergency', 'Multi-speciality']
+                    .map((filter) {
                   final isSelected = selectedFilter == filter;
 
                   return ChoiceChip(
@@ -223,7 +206,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    'Available Doctors',
+                    'Available Hospitals',
                     style: TextStyle(
                       fontSize: 19,
                       fontWeight: FontWeight.bold,
@@ -231,7 +214,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
                     ),
                   ),
                   Text(
-                    '${filteredDoctors.length} found',
+                    '${filteredHospitals.length} found',
                     style: const TextStyle(
                       color: AppColors.textSecondary,
                     ),
@@ -241,7 +224,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
 
               const SizedBox(height: 15),
 
-              if (filteredDoctors.isEmpty)
+              if (filteredHospitals.isEmpty)
                 const Center(
                   child: Padding(
                     padding: EdgeInsets.all(30),
@@ -253,14 +236,14 @@ class _DoctorScreenState extends State<DoctorScreen> {
                           color: AppColors.textSecondary,
                         ),
                         SizedBox(height: 10),
-                        Text('No doctors found'),
+                        Text('No hospitals found'),
                       ],
                     ),
                   ),
                 ),
 
-              ...filteredDoctors.map((doctor) {
-                return doctorCard(doctor);
+              ...filteredHospitals.map((hospital) {
+                return hospitalCard(hospital);
               }),
             ],
           ),
@@ -269,7 +252,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
     );
   }
 
-  Widget doctorCard(Map<String, dynamic> doctor) {
+  Widget hospitalCard(Map<String, dynamic> hospital) {
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
       padding: const EdgeInsets.all(16),
@@ -290,7 +273,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
                   borderRadius: BorderRadius.circular(13),
                 ),
                 child: const Icon(
-                  Icons.medical_services_outlined,
+                  Icons.local_hospital,
                   color: AppColors.primary,
                   size: 30,
                 ),
@@ -303,7 +286,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      doctor['name'],
+                      hospital['name'],
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -312,7 +295,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      doctor['specialty'],
+                      hospital['type'],
                       style: const TextStyle(
                         color: AppColors.textSecondary,
                         fontSize: 12,
@@ -321,34 +304,65 @@ class _DoctorScreenState extends State<DoctorScreen> {
                   ],
                 ),
               ),
-
-              const Icon(
-                Icons.star,
-                color: Colors.orange,
-                size: 17,
-              ),
-              Text(doctor['rating']),
             ],
           ),
 
           const SizedBox(height: 15),
 
-          detailItem(
-            Icons.local_hospital_outlined,
-            doctor['hospital'],
+          Row(
+            children: [
+              const Icon(
+                Icons.location_on_outlined,
+                size: 17,
+                color: AppColors.textSecondary,
+              ),
+              const SizedBox(width: 5),
+              Expanded(
+                child: Text(
+                  hospital['address'],
+                  style: const TextStyle(fontSize: 13),
+                ),
+              ),
+              const Icon(
+                Icons.star,
+                color: Colors.orange,
+                size: 17,
+              ),
+              Text(
+                hospital['rating'],
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
           ),
 
-          detailItem(
-            Icons.work_outline,
-            '${doctor['experience']} experience',
-          ),
+          const SizedBox(height: 10),
 
-          detailItem(
-            Icons.circle,
-            doctor['availability'],
-            color: doctor['availability'] == 'Available'
-                ? Colors.green
-                : Colors.red,
+          Row(
+            children: [
+              const Icon(
+                Icons.directions_walk,
+                size: 17,
+                color: AppColors.textSecondary,
+              ),
+              const SizedBox(width: 5),
+              Text(
+                hospital['distance'],
+                style: const TextStyle(fontSize: 13),
+              ),
+              const Spacer(),
+              const Icon(
+                Icons.phone_outlined,
+                size: 16,
+                color: AppColors.primary,
+              ),
+              const SizedBox(width: 5),
+              Text(
+                hospital['phone'],
+                style: const TextStyle(fontSize: 13),
+              ),
+            ],
           ),
 
           const Divider(height: 25),
@@ -357,7 +371,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
             children: [
               const Expanded(
                 child: Text(
-                  'Doctor information',
+                  'Hospital information',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     color: AppColors.textPrimary,
@@ -369,8 +383,8 @@ class _DoctorScreenState extends State<DoctorScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => DoctorDetailsScreen(
-                        doctor: doctor,
+                      builder: (_) => HospitalDetailsScreen(
+                        hospital: hospital,
                       ),
                     ),
                   );
@@ -383,46 +397,27 @@ class _DoctorScreenState extends State<DoctorScreen> {
       ),
     );
   }
-
-  Widget detailItem(
-      IconData icon,
-      String value, {
-        Color color = AppColors.textSecondary,
-      }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        children: [
-          Icon(icon, size: 17, color: color),
-          const SizedBox(width: 9),
-          Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(fontSize: 13),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
-// Doctor details screen
+// Hospital details screen
 
-class DoctorDetailsScreen extends StatelessWidget {
-  final Map<String, dynamic> doctor;
+class HospitalDetailsScreen extends StatelessWidget {
+  final Map<String, dynamic> hospital;
 
-  const DoctorDetailsScreen({
+  const HospitalDetailsScreen({
     super.key,
-    required this.doctor,
+    required this.hospital,
   });
 
   @override
   Widget build(BuildContext context) {
+    final departments =
+    hospital['departments'] as List<String>;
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('Doctor Details'),
+        title: const Text('Hospital Details'),
         backgroundColor: Colors.white,
         foregroundColor: AppColors.textPrimary,
         elevation: 0,
@@ -440,16 +435,16 @@ class DoctorDetailsScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18),
               ),
               child: const Icon(
-                Icons.person_outline,
+                Icons.local_hospital,
                 color: AppColors.primary,
-                size: 75,
+                size: 65,
               ),
             ),
 
             const SizedBox(height: 22),
 
             Text(
-              doctor['name'],
+              hospital['name'],
               style: const TextStyle(
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
@@ -457,48 +452,32 @@ class DoctorDetailsScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 8),
-
-            Text(
-              doctor['specialty'],
-              style: const TextStyle(
-                color: AppColors.primary,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-
-            const SizedBox(height: 20),
+            const SizedBox(height: 12),
 
             detailRow(
-              Icons.local_hospital,
-              doctor['hospital'],
+              Icons.location_on,
+              hospital['address'],
             ),
 
             detailRow(
-              Icons.school_outlined,
-              doctor['qualification'],
-            ),
-
-            detailRow(
-              Icons.work_outline,
-              '${doctor['experience']} experience',
+              Icons.phone,
+              hospital['phone'],
             ),
 
             detailRow(
               Icons.star,
-              '${doctor['rating']} Rating',
+              '${hospital['rating']} Rating',
             ),
 
             detailRow(
-              Icons.circle,
-              doctor['availability'],
+              Icons.directions_walk,
+              hospital['distance'],
             ),
 
             const SizedBox(height: 25),
 
             const Text(
-              'About Doctor',
+              'Available Departments',
               style: TextStyle(
                 fontSize: 19,
                 fontWeight: FontWeight.bold,
@@ -506,17 +485,28 @@ class DoctorDetailsScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 12),
+            const SizedBox(height: 15),
 
-            Text(
-              doctor['about'],
-              style: const TextStyle(
-                fontSize: 14,
-                color: AppColors.textSecondary,
-              ),
-            ),
+            ...departments.map((department) {
+              return Card(
+                color: Colors.white,
+                elevation: 0,
+                margin: const EdgeInsets.only(bottom: 10),
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.medical_services_outlined,
+                    color: AppColors.primary,
+                  ),
+                  title: Text(department),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 15,
+                  ),
+                ),
+              );
+            }),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
 
             SizedBox(
               width: double.infinity,
@@ -525,13 +515,13 @@ class DoctorDetailsScreen extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text(
-                        'Appointment booking will be added next.',
+                        'Map integration will be added next.',
                       ),
                     ),
                   );
                 },
-                icon: const Icon(Icons.calendar_month),
-                label: const Text('Book Appointment'),
+                icon: const Icon(Icons.map),
+                label: const Text('View on Map'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
